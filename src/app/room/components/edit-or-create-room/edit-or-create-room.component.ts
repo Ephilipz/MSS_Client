@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-edit-or-create-room',
   templateUrl: './edit-or-create-room.component.html',
-  styleUrls: ['./edit-or-create-room.component.css']
+  styleUrls: ['./edit-or-create-room.component.scss']
 })
 export class EditOrCreateRoomComponent implements OnInit {
 
