@@ -1,1 +1,33 @@
-<p>register works!</p>
+<div class="container-fluid p-5" style="height: 100%;">
+    <h1 class="mainHeading centerText">Register</h1>
+    <form class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
+        <mdb-form-control>
+            <input mdbInput type="text" id="fullName" class="form-control" />
+            <label mdbLabel class="form-label" for="fullName">Full Name</label>
+        </mdb-form-control>
+
+        <mdb-form-control>
+            <input mdbInput type="text" id="fullName" class="form-control" />
+            <label mdbLabel class="form-label" for="fullName">Email</label>
+        </mdb-form-control>
+
+        <mdb-form-control>
+            <input mdbInput type="password" id="password" class="form-control" />
+            <label mdbLabel class="form-label" for="password">Password</label>
+        </mdb-form-control>
+
+        <mdb-form-control>
+            <input mdbInput type="password" id="confirmPassword" class="form-control" />
+            <label mdbLabel class="form-label" for="confirmPassword">Confirm Password</label>
+        </mdb-form-control>
+
+        <!-- Sign in button -->
+        <button type="button" class="btn lg mt-4">Register</button>
+    </form>
+
+    <div class="container centerText mt-5">
+        <p>Already have an account?</p>
+        <button type="button" class="btn" routerLink="../Login">Sign In</button>
+    </div>
+
+</div>
