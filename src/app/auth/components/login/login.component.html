@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="container-fluid p-5" style="height: 100%;">
+    <h1 class="mainHeading centerText">Sign In To Continue</h1>
+    <form class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
+        <mdb-form-control>
+            <input mdbInput type="text" id="userName" class="form-control" />
+            <label mdbLabel class="form-label" for="userName">Username</label>
+        </mdb-form-control>
+
+        <mdb-form-control>
+            <input mdbInput type="password" id="password" class="form-control" />
+            <label mdbLabel class="form-label" for="password">Password</label>
+        </mdb-form-control>
+
+        <!-- Sign in button -->
+        <button type="button" class="btn lg mt-4">Sign In</button>
+    </form>
+
+    
+    <div class="btn-group" role="group">
+        <div class="col-sm-12 centerText mt-5">
+            <p>Don't have an Account?</p>
+            <button type="button" class="btn btn-primary" routerLink="../Register">Register</button>
+        </div>
+
+        <div class="col-sm-12 centerText mt-5">
+            <p>Forgot Password?</p>
+            <button type="button" class="btn btn-primary" routerLink="../Register">Reset Password</button>
+        </div>
+    </div>
+
+
+</div>
