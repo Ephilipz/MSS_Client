@@ -1,29 +1,36 @@
 <div class="container-fluid p-5" style="height: 100%;">
     <h1 class="mainHeading centerText">Register</h1>
-    <form class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
-        <mdb-form-control>
-            <input mdbInput type="text" id="fullName" class="form-control" />
-            <label mdbLabel class="form-label" for="fullName">Full Name</label>
-        </mdb-form-control>
-
-        <mdb-form-control>
-            <input mdbInput type="text" id="email" class="form-control" />
-            <label mdbLabel class="form-label" for="email">Email</label>
-        </mdb-form-control>
-
-        <mdb-form-control>
-            <input mdbInput type="password" id="password" class="form-control" />
-            <label mdbLabel class="form-label" for="password">Password</label>
-        </mdb-form-control>
-
-        <mdb-form-control>
-            <input mdbInput type="password" id="confirmPassword" class="form-control" />
-            <label mdbLabel class="form-label" for="confirmPassword">Confirm Password</label>
-        </mdb-form-control>
-
-        <!-- Sign in button -->
-        <button type="button" class="btn lg mt-4">Register</button>
+    <form [formGroup]="registerFormGroup">
+        <form class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
+            <mdb-form-control>
+                <input mdbInput type="text" id="fullName" class="form-control" />
+                <label mdbLabel class="form-label" for="fullName">Full Name</label>
+                <small *ngIf="registerFormGroup.get('fullName')!.touched && registerFormGroup.get('fullName')!.invalid" class="text-danger">Name is invalid</small>
+            </mdb-form-control>
+    
+            <mdb-form-control>
+                <input mdbInput type="text" id="email" class="form-control" />
+                <label mdbLabel class="form-label" for="email">Email</label>
+                <small *ngIf="registerFormGroup.get('email')!.touched && registerFormGroup.get('email')!.invalid"></small>
+            </mdb-form-control>
+    
+            <mdb-form-control>
+                <input mdbInput type="password" id="password" class="form-control" />
+                <label mdbLabel class="form-label" for="password">Password</label>
+                <small *ngIf="registerFormGroup.get('password')!.touched && registerFormGroup.get('password')!.invalid"></small>
+            </mdb-form-control>
+    
+            <mdb-form-control>
+                <input mdbInput type="password" id="confirmPassword" class="form-control" />
+                <label mdbLabel class="form-label" for="confirmPassword">Confirm Password</label>
+                <small *ngIf="registerFormGroup.get('confirmPassword')!.touched && registerFormGroup.get('confirmPassword')!.invalid"></small>
+            </mdb-form-control>
+    
+            <!-- Sign in button -->
+            <button [disabled]="registerFormGroup.invalid" type="button" class="btn lg mt-4">Register</button>
+        </form>
     </form>
+ 
 
     <div class="container centerText mt-5">
         <p>Already have an account?</p>
