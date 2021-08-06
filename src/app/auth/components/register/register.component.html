@@ -1,28 +1,28 @@
 <div class="container-fluid p-5" style="height: 100%;">
     <h1 class="mainHeading centerText">Register</h1>
-    <form class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
+    <form class="mx-auto centerText" [formGroup]="registerFormGroup" style="min-width: 400px; max-width: fit-content;" (ngSubmit)="register()">
         <mdb-form-control>
-            <input mdbInput type="text" id="fullName" class="form-control" />
+            <input mdbInput type="text" id="fullName" class="form-control" formControlName="fullName" />
             <label mdbLabel class="form-label" for="fullName">Full Name</label>
         </mdb-form-control>
 
         <mdb-form-control>
-            <input mdbInput type="text" id="fullName" class="form-control" />
+            <input mdbInput type="email" id="fullName" class="form-control" formControlName="email"/>
             <label mdbLabel class="form-label" for="fullName">Email</label>
         </mdb-form-control>
 
         <mdb-form-control>
-            <input mdbInput type="password" id="password" class="form-control" />
+            <input mdbInput type="password" id="password" class="form-control" formControlName="password"/>
             <label mdbLabel class="form-label" for="password">Password</label>
         </mdb-form-control>
 
         <mdb-form-control>
-            <input mdbInput type="password" id="confirmPassword" class="form-control" />
+            <input mdbInput type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"/>
             <label mdbLabel class="form-label" for="confirmPassword">Confirm Password</label>
         </mdb-form-control>
 
         <!-- Sign in button -->
-        <button type="button" class="btn lg mt-4">Register</button>
+        <button type="submit" class="btn lg mt-4">Register</button>
     </form>
 
     <div class="container centerText mt-5">
