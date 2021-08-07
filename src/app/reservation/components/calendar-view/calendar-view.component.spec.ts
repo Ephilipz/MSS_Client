@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CalenderViewComponent } from './calender-view.component';
+import { CalenderViewComponent } from './calendar-view.component';
 
 describe('CalenderViewComponent', () => {
   let component: CalenderViewComponent;

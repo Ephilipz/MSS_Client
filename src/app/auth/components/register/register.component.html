@@ -1,34 +1,57 @@
 <div class="container-fluid p-5" style="height: 100%;">
     <h1 class="mainHeading centerText">Register</h1>
-    <form [formGroup]="registerFormGroup">
-        <form class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
+    <form [formGroup]="registerFormGroup" novalidate (ngSubmit)="save(registerFormGroup.value,registerFormGroup.valid)" class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
+
+        <div class="form-group">
             <mdb-form-control>
-                <input mdbInput type="text" id="fullName" class="form-control" />
+                <input mdbInput type="text" formControlName="fullName" class="form-control" />
                 <label mdbLabel class="form-label" for="fullName">Full Name</label>
-                <small *ngIf="registerFormGroup.get('fullName')!.touched && registerFormGroup.get('fullName')!.invalid" class="text-danger">Name is invalid</small>
+                
+                <div *ngIf="(fullName!.invalid && fullName!.touched) || fullName!.dirty">
+                    <small *ngIf="fullName!.errors?.required" class="text-danger">Full Name is required</small>
+                  </div>
             </mdb-form-control>
-    
+        </div>
+
+        
+        <div class="form-group">
             <mdb-form-control>
-                <input mdbInput type="text" id="email" class="form-control" />
+                <input mdbInput type="text" formControlName="email" class="form-control" />
                 <label mdbLabel class="form-label" for="email">Email</label>
-                <small *ngIf="registerFormGroup.get('email')!.touched && registerFormGroup.get('email')!.invalid"></small>
+                
+
+                <div *ngIf="(email!.invalid && email!.touched) || email!.dirty">
+                    <small *ngIf="email!.errors?.required" class="text-danger">Email is required</small>
+                    <small *ngIf="email!.errors?.email" class="text-danger">Please provide a valid email address</small>
+                  </div>
             </mdb-form-control>
+        </div>
+
     
+        <div class="form-group">
             <mdb-form-control>
-                <input mdbInput type="password" id="password" class="form-control" />
+                <input mdbInput type="password" formControlName="password" class="form-control" />
                 <label mdbLabel class="form-label" for="password">Password</label>
-                <small *ngIf="registerFormGroup.get('password')!.touched && registerFormGroup.get('password')!.invalid"></small>
+                <div *ngIf="(password!.invalid && password!.touched) || password!.dirty">
+                    <small *ngIf="password!.errors?.required" class="text-danger">Password is required</small>
+                  </div>
             </mdb-form-control>
-    
+        </div>
+
+        
+        <div class="form-group">
             <mdb-form-control>
-                <input mdbInput type="password" id="confirmPassword" class="form-control" />
+                <input mdbInput type="password" formControlName="confirmPassword" class="form-control" />
                 <label mdbLabel class="form-label" for="confirmPassword">Confirm Password</label>
-                <small *ngIf="registerFormGroup.get('confirmPassword')!.touched && registerFormGroup.get('confirmPassword')!.invalid"></small>
+                <div *ngIf="(confirmPassword!.invalid && confirmPassword!.touched) || confirmPassword!.dirty">
+                    <small *ngIf="confirmPassword!.errors?.required" class="text-danger">Please confirm password</small>
+                  </div>
             </mdb-form-control>
+        </div>
+
     
             <!-- Sign in button -->
-            <button [disabled]="registerFormGroup.invalid" type="button" class="btn lg mt-4">Register</button>
-        </form>
+            <button type="submit" [disabled]="!registerFormGroup.valid" class="btn lg mt-4">Register</button> 
     </form>
  
 
