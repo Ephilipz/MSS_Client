@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 import { ReservationModalComponent } from './components/reservation-modal/reservation-modal.component';
 import { ManageMeetingComponent } from './components/manage-meeting/manage-meeting.component';
-import { DateAdapter } from 'angular-calendar';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { ReservationRoutingModule } from './reservation-routing.module';
-
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 
 @NgModule({
@@ -18,9 +19,17 @@ import { ReservationRoutingModule } from './reservation-routing.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReservationRoutingModule,
     MdbFormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    CommonModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+  }),
+],
 })
 export class ReservationModule { }
