@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../auth.service';
 import { RegisterVM } from '../../entities/registerVM.entity';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,19 +12,41 @@ import { RegisterVM } from '../../entities/registerVM.entity';
 })
 export class RegisterComponent implements OnInit {
 
-  registerFormGroup: FormGroup = new FormGroup({
-    fullName: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-    confirmPassword: new FormControl(null, [Validators.required]),
-  });
-  
-  constructor(private authService: AuthService, private toast: ToastrService) { }
-
-  ngOnInit(): void {
+  get fullName() {
+    return this.registerFormGroup.get('fullName');
   }
 
-  register(){
+  get email() {
+    return this.registerFormGroup.get('email');
+  }
+
+  get password() {
+    return this.registerFormGroup.get('password');
+  }
+
+  get confirmPassword() {
+    return this.registerFormGroup.get('confirmPassword');
+  }
+
+  registerFormGroup = new FormGroup({
+    fullName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
+    confirmPassword: new FormControl('', Validators.required)
+  });
+
+  constructor(private authService: AuthService, private toast: ToastrService) { }
+
+
+  ngOnInit() {
+  }
+
+  save(model: UserVerificationRequirement, isValid: boolean) {
+    console.log(model, isValid);
+
+  }
+
+  register() {
     const fullName = this.registerFormGroup.controls['fullName'].value;
     const email = this.registerFormGroup.controls['email'].value;
     const password = this.registerFormGroup.controls['password'].value;
@@ -40,3 +63,5 @@ export class RegisterComponent implements OnInit {
   }
 
 }
+
+

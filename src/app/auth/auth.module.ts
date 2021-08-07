@@ -5,19 +5,18 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     MdbFormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MdbValidationModule
   ]
 })
 export class AuthModule { }
