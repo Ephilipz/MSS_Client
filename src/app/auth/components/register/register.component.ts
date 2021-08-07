@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../auth.service';
 import { RegisterVM } from '../../entities/registerVM.entity';
@@ -11,50 +12,54 @@ import { RegisterVM } from '../../entities/registerVM.entity';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  
   get fullName() {
     return this.registerFormGroup.get('fullName');
   }
-
+  
   get email() {
     return this.registerFormGroup.get('email');
   }
-
+  
   get password() {
     return this.registerFormGroup.get('password');
   }
-
+  
   get confirmPassword() {
     return this.registerFormGroup.get('confirmPassword');
   }
 
+  
   registerFormGroup = new FormGroup({
     fullName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-    confirmPassword: new FormControl('', Validators.required)
-  });
+    confirmPassword: new FormControl('')
+  }, {validators: this.checkMatch});
+  
+  checkMatch(formGrp: AbstractControl) : ValidationErrors | null {
+    let _original = formGrp.get('password');
+    let _confirm = formGrp.get('confirmPassword');
+    if (!_original || !_confirm) return null;
+    return _original.value === _confirm.value ? null : { notSame: true };
+  }
 
-  constructor(private authService: AuthService, private toast: ToastrService) { }
+  constructor(private authService: AuthService, private toast: ToastrService, private router: Router) { }
 
 
   ngOnInit() {
   }
 
-  save(model: UserVerificationRequirement, isValid: boolean) {
-    console.log(model, isValid);
-
-  }
-
   register() {
-    const fullName = this.registerFormGroup.controls['fullName'].value;
-    const email = this.registerFormGroup.controls['email'].value;
-    const password = this.registerFormGroup.controls['password'].value;
+    const fullName = this.fullName?.value;
+    const email = this.email?.value;
+    const password = this.password?.value;
     const registerVM = new RegisterVM(fullName, email, password);
 
     this.authService.registerClient(registerVM).subscribe(
       (success) => {
         this.toast.success('Registration Complete');
+        this.router.navigate(['../Reservation/CalendarView']);
       },
       (error) => {
         this.toast.error('Error Registering this user');

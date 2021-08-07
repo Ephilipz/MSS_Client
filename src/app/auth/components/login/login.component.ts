@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../auth.service';
+import { LoginVM } from '../../entities/loginVM.entity';
 
 @Component({
   selector: 'app-login',
@@ -9,25 +12,41 @@ import { AuthService } from '../../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  get userName(){
-    return this.loginFormGroup.get('userName')
+  get email() {
+    return this.loginFormGroup.get('email')
   }
 
-  get password(){
+  get password() {
     return this.loginFormGroup.get('password')
   }
 
   loginFormGroup: FormGroup = new FormGroup({
-    userName : new FormControl('', Validators.required),
-    password : new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
   }
-  
+
   );
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private toast: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  login() {
+    const email = this.email?.value;
+    const password = this.password?.value;
+
+    const loginVM = new LoginVM(email, password);
+
+    this.authService.login(loginVM).subscribe(
+      (success) => {
+        this.toast.success('Welcome');
+        this.router.navigate(['../Reservation/CalendarView']);
+      },
+      (error) => {
+        this.toast.error('Error Registering this user');
+      }
+    )
+  }
 }

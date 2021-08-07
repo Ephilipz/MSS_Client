@@ -1,13 +1,14 @@
 <div class="container-fluid p-5" style="height: 100%;">
     <h1 class="mainHeading centerText">Sign In To Continue</h1>
-    <form [formGroup]="loginFormGroup" class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;">
+    <form [formGroup]="loginFormGroup" class="mx-auto centerText" style="min-width: 400px; max-width: fit-content;" (ngSubmit)="login()">
         
         <div class="form-group">
             <mdb-form-control>
-                <input mdbInput type="text" formControlName="userName" class="form-control" />
-                <label mdbLabel class="form-label" for="userName">Username</label>
-                <div *ngIf="(userName!.invalid && userName!.touched) || userName!.dirty">
-                    <small *ngIf="userName!.errors?.required" class="text-danger">Username is required</small>
+                <input mdbInput type="text" formControlName="email" class="form-control" />
+                <label mdbLabel class="form-label" for="email">email</label>
+                <div *ngIf="(email!.invalid && email!.touched) || email!.dirty">
+                    <small *ngIf="email!.errors?.required" class="text-danger">email is required</small>
+                    <small *ngIf="email!.errors?.email" class="text-danger">invalid email</small>
                 </div>
             </mdb-form-control>
         </div>
@@ -28,18 +29,9 @@
         <button type="submit" [disabled]="!loginFormGroup.valid"  class="btn lg mt-4">Sign In</button>
     </form>
 
-    <div class="container" style="height: 20%; max-width: 600px;">        
-            <div class="row">
-                <div class="col-md-6 col-md-6 centerText mt-5">
-                    <p>Don't have an Account?</p>
-                    <button type="button" class="btn btn-primary" routerLink="../Register">Register</button>
-                </div>
-
-                <div class="col-md-6 col-md-6 centerText mt-5">
-                    <p>Forgot Password?</p>
-                    <button type="button" class="btn btn-primary" routerLink="../Register">Reset Password</button>
-                </div>
-            </div>
+    <div class="container centerText mt-5">
+        <p>Don't have an account yet?</p>
+        <button type="button" class="btn" routerLink="../Register">Register</button>
     </div>
 
 

@@ -4,10 +4,10 @@ import { ReservationModule } from './reservation/reservation.module';
 
 const routes: Routes = [
   { path: 'Auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'Room', loadChildren: './room/room.module#RoomModule' },
-  { path: 'Reservation', loadChildren: () => import('./reservation/reservation.module').then(m =>ReservationModule) },
-  { path: 'Complaint', loadChildren: './complaint/complaint.module#ComplaintModule' },
-  { path: 'Profile', loadChildren: './profile/profile.module#ProfileModule' },
+  { path: 'Room', loadChildren: () => import('./room/room.module').then(m => m.RoomModule) },
+  { path: 'Reservation', loadChildren: () => import('./reservation/reservation.module').then(m => m.ReservationModule) },
+  { path: 'Complaint', loadChildren: () => import('./complaint/complaint.module').then(m => m.ComplaintModule) },
+  { path: 'Profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
 ];
 
 @NgModule({
