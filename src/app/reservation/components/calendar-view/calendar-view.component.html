@@ -1,100 +1,57 @@
-<div class="row text-center">
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          mwlCalendarPreviousView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Previous
-        </div>
-        <div
-          class="btn btn-outline-secondary"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-        >
-          Today
-        </div>
-        <div
-          class="btn btn-primary"
-          mwlCalendarNextView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Next
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-    </div>
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Month)"
-          [class.active]="view === CalendarView.Month"
-        >
-          Month
-        </div>
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week"
-        >
-          Week
-        </div>
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Day)"
-          [class.active]="view === CalendarView.Day"
-        >
-          Day
+
+    <!--Center column with date and arrows-->
+     
+      <div class="centered" style="display: table;">
+       
+        <div style="display: table-row">
+          <!--Lefthand button-->
+          <div style="display: table-cell;"
+            class="btn"
+            mwlCalendarPreviousView
+            [view]="CalendarView.Week"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+            <h2>&lsaquo;</h2>
+          </div>
+          
+          <!--Display center date-->
+          <div style="display: table-cell;">
+            <h3 class="vertical">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en':weekStartsOn:excludeDays }}</h3>
+          </div>
+          
+          <!--Righthand button-->
+          <div style="display: table-cell;"
+            class="btn"
+            mwlCalendarNextView
+            [view]="CalendarView.Week"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+            <h2>&rsaquo;</h2>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+
   <br />
-  <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="CalendarView.Month"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-month-view>
+ 
+  <!--weekly view for the calendar-->
     <mwl-calendar-week-view
-      *ngSwitchCase="CalendarView.Week"
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
       (eventClicked)="handleEvent('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
+      [excludeDays]="excludeDays"
+      [dayStartHour]="8"
+      [dayEndHour]="17"
     >
     </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="CalendarView.Day"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-day-view>
-  </div>
   
   
   <br /><br /><br />
   
+  <!--Button and title to change meetings-->
   <h3>
-    Edit events
+    Edit Meetings
     <button class="btn btn-primary float-right" (click)="addEvent()">
       Add new
     </button>
@@ -102,17 +59,8 @@
   </h3>
   
   <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Primary color</th>
-          <th>Secondary color</th>
-          <th>Starts at</th>
-          <th>Ends at</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
+    
+
   
       <tbody>
         <tr *ngFor="let event of events">
@@ -175,7 +123,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
+
   </div>
   
   <ng-template #modalContent let-close="close">

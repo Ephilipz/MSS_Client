@@ -24,6 +24,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import { DAYS_OF_WEEK } from 'angular-calendar';
 
 const colors: any = {
   red: {
@@ -50,13 +51,11 @@ const colors: any = {
 export class CalendarViewComponent implements OnInit{
 
 
-  ngOnInit(): void {
-  }
 
   @ViewChild('modalContent', { static: true })
   modalContent!: TemplateRef<any>;
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
 
@@ -88,12 +87,16 @@ export class CalendarViewComponent implements OnInit{
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
+    
       
   ];
 
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -160,4 +163,8 @@ export class CalendarViewComponent implements OnInit{
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
+
+  excludeDays: number[] = [0, 6];
+
+  weekStartsOn = DAYS_OF_WEEK.SUNDAY;
 }

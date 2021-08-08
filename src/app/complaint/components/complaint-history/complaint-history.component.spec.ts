@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompalaintHistoryComponent } from './compalaint-history.component';
+import { ComplaintHistoryComponent } from './complaint-history.component';
 
-describe('CompalaintHistoryComponent', () => {
-  let component: CompalaintHistoryComponent;
-  let fixture: ComponentFixture<CompalaintHistoryComponent>;
+describe('ComplaintHistoryComponent', () => {
+  let component: ComplaintHistoryComponent;
+  let fixture: ComponentFixture<ComplaintHistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CompalaintHistoryComponent ]
+      declarations: [ ComplaintHistoryComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CompalaintHistoryComponent);
+    fixture = TestBed.createComponent(ComplaintHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

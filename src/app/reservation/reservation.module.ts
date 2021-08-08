@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
-import { ReservationModalComponent } from './components/reservation-modal/reservation-modal.component';
-import { ManageMeetingComponent } from './components/manage-meeting/manage-meeting.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +15,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
     CalendarViewComponent,
 
   ],
+  exports: [CalendarViewComponent],
   imports: [
     CommonModule,
     FormsModule,
