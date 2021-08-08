@@ -1,18 +1,37 @@
 h3 {
-    margin: 0 0 10px;
-  }
-  
-  pre {
-    background-color: #f5f5f5;
-    padding: 15px;
-  }
+  margin: 0 0 10px;
+}
 
-  .centered{ 
-    margin: auto; max-width: 500px; max-height: 50px
-  }
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+}
 
-  .vertical{
-    margin-top:8%;
-  }
+.centered{ 
+  margin: auto; max-width: 500px; max-height: 50px
+}
 
-  
+.vertical{
+  margin-top:8%;
+}
+
+.btn-round{
+  border-radius: 10px;
+}
+
+.header-btns{
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+}
+.header-btns div{
+  display: inline-block;
+  font-weight: 600;
+  font-size: 40px;
+  padding: 0px 50px;
+}
+
+.calendar-view{
+  max-width: 1180px;
+  margin: auto;
+}

@@ -1,25 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ManageProfileComponent } from './manage-profile.component';
+@Component({
+  selector: 'app-manage-profile',
+  templateUrl: './manage-profile.component.html',
+  styleUrls: ['./manage-profile.component.scss']
+})
+export class ManageProfileComponent implements OnInit {
 
-describe('ManageProfileComponent', () => {
-  let component: ManageProfileComponent;
-  let fixture: ComponentFixture<ManageProfileComponent>;
+  constructor() { }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ManageProfileComponent ]
-    })
-    .compileComponents();
-  });
+  ngOnInit(): void {
+  }
+  loginFormGroup: FormGroup = new FormGroup({
+    fullName: new FormControl('', Validators.required),
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ManageProfileComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  );
+}
