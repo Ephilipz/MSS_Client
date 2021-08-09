@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-complaint-history',
   templateUrl: './complaint-history.component.html',
-  styleUrls: ['./complaint-history.component.css']
+  styleUrls: ['./complaint-history.component.scss']
 })
 export class ComplaintHistoryComponent implements OnInit {
 
