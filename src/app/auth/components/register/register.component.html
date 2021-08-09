@@ -16,13 +16,14 @@
 
         <div class="form-group">
             <mdb-form-control>
-                <input mdbInput type="text" formControlName="email" class="form-control" />
+                <input mdbInput type="text" formControlName="email" class="form-control" required [pattern] ="emailPattern"/>
                 <label mdbLabel class="form-label" for="email">Email</label>
 
 
                 <div *ngIf="(email!.invalid && email!.touched) || email!.dirty">
                     <small *ngIf="email!.errors?.required" class="text-danger">Email is required</small>
-                    <small *ngIf="email!.errors?.email" class="text-danger">Please provide a valid email address</small>
+                    <small *ngIf="email!.errors?.email" class="text-danger">Please provide a valid email address! </small>
+                    <small *ngIf="email!.errors?.pattern" class="text-danger">invalid email domain</small>
                 </div>
             </mdb-form-control>
         </div>

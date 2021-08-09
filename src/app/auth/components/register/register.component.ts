@@ -12,6 +12,7 @@ import { RegisterVM } from '../../entities/registerVM.entity';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  emailPattern = "^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)+(@psu.edu)$";
   
   get fullName() {
     return this.registerFormGroup.get('fullName');
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
   
   registerFormGroup = new FormGroup({
     fullName: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]),
     password: new FormControl('', Validators.required),
     confirmPassword: new FormControl('')
   }, {validators: this.checkMatch});

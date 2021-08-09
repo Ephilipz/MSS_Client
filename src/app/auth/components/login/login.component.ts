@@ -11,6 +11,7 @@ import { LoginVM } from '../../entities/loginVM.entity';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  emailPattern = "^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)+(@psu.edu)$";
 
   get email() {
     return this.loginFormGroup.get('email')
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginFormGroup: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]),
     password: new FormControl('', Validators.required),
   }
 
