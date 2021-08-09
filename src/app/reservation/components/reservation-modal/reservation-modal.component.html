@@ -1,1 +1,111 @@
-<p>reservation-modal works!</p>
+<!-- Reserve a Special room -->
+<div class="container">
+    <div class="box">
+        <div class="box">
+            <form [formGroup]="rerervationModal" class="mx-auto centerText">    
+                <div class="form-group">
+                    <mdb-form-control class="m-t-0">
+                        <select class="form-select" aria-label="Select Room">
+                            <option selected>Room 41</option>
+                            <option value="2">Room 42</option>
+                            <option value="3">Room 43</option>
+                          </select>
+                    </mdb-form-control>
+                    <p class="time">11am-12pm</p>
+                </div>
+                <div class="form-flex-row">
+                    <div class="form-col flex-1">
+                        <div class="form-group">
+                            <mdb-form-control class="m-t-0">
+                                <input mdbInput type="text" formControlName="fullName" class="form-control" />
+                                <label mdbLabel class="form-label" for="fullName">Name on card</label>
+                            </mdb-form-control>
+                        </div>
+
+                        <div class="form-group">
+                            <mdb-form-control>
+                                <input mdbInput type="text" formControlName="email" class="form-control" />
+                                <label mdbLabel class="form-label" for="email">Address</label>
+                            </mdb-form-control>
+                        </div>
+
+                        <div class="form-group">
+                            <mdb-form-control>
+                                <input mdbInput type="password" formControlName="password" class="form-control" />
+                                <label mdbLabel class="form-label" for="password">Card Number</label>
+                            </mdb-form-control>
+                        </div>
+
+                        <div class="form-group cvc-field">
+                            <mdb-form-control class="cvc">
+                                <input mdbInput type="password" formControlName="password" class="form-control" />
+                                <label mdbLabel class="form-label" for="password">CVC</label>
+                            </mdb-form-control>
+                            <mdb-form-control class="expiry">
+                                <input mdbInput type="password" formControlName="password" class="form-control" />
+                                <label mdbLabel class="form-label" for="password">Expiry (mm/yy)</label>
+                            </mdb-form-control>
+                        </div>
+                    </div>
+                    <div class="form-col flex-inherit">
+                        <span class="or">OR</span>
+                    </div>
+                    <div class="form-col flex-1">
+
+                        <div class="form-group">
+                            <mdb-form-control>
+                                <input mdbInput type="text" formControlName="email" class="form-control" />
+                                <label mdbLabel class="form-label" for="email">Paypal email</label>
+                            </mdb-form-control>
+                        </div>
+
+                        <div class="form-group">
+                            <mdb-form-control>
+                                <input mdbInput type="password" formControlName="password" class="form-control" />
+                                <label mdbLabel class="form-label" for="password">Paypal password</label>
+                            </mdb-form-control>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-btn-row">
+                    <div></div>
+                    <div class="reserve-btn"><button type="submit" class="btn sm mt-4 center">Reserve</button></div>
+                    <div class="cost"><p>Cost : $100</p></div>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Reserve a Free room -->
+<div class="container">
+    <div class="box">
+        <div class="box">
+            <form class="mx-auto centerText">    
+                <div class="form-group">
+                    <div class="m-t-0">
+                        <select class="form-select" aria-label="Select Room">
+                            <option selected>Room 41</option>
+                            <option value="2">Room 42</option>
+                            <option value="3">Room 43</option>
+                          </select>
+                        </div>
+                    <p class="time">11am-12pm</p>
+                </div>
+
+                <div class="form-btn-row">
+                    <div></div>
+                    <div class="reserve-btn"><button type="submit" class="btn sm mt-4 center">Reserve</button></div>
+                    <div class="cost"><p>Cost : $100</p></div>
+                </div>       
+
+            </form>
+        </div>
+    </div>
+</div>

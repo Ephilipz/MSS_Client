@@ -1,0 +1,53 @@
+.form-flex-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.time{
+    font-size: 40px;
+    font-weight: 300;
+}
+.form-col .or{
+    font-size: 40px;
+    font-weight: 800;
+    padding: 0px 50px;
+    color: #000;
+}
+.cvc-field{
+    display: flex;
+}
+.cvc{
+    flex: 1;
+    min-width: 54px;
+    margin-right: 10px;
+}
+.expiry{
+    flex-grow: 2;
+}
+
+.reserve-btn button{
+    font-size: 20px;
+    padding: 5px 40px;
+    border-radius: 13px;
+    text-transform: capitalize;
+    margin-top: 0px !important;
+}
+.form-btn-row{
+    display: flex;
+    margin-top: 50px;
+}
+.form-btn-row div{
+    flex: 1;
+}
+.cost p{
+    margin: 0px;
+    font-size: 26px;
+    font-weight: 300;
+    text-align: right;
+}
+.flex-1{
+    flex: 1;
+}
+.flex-inherit{
+    flex: inherit;
+} 
