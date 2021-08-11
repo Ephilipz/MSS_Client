@@ -15,12 +15,9 @@
 
                     <div class="form-group">
                         <mdb-form-control>
-                            <input mdbInput type="text" formControlName="email" class="form-control" id="email" />
+                            <input mdbInput type="text" formControlName="email" class="form-control" id="email"
+                                [disabled]="true" />
                             <label mdbLabel class="form-label" for="email">Email</label>
-
-                            <div *ngIf="(email!.invalid && email!.touched) || email!.dirty">
-                                <small *ngIf="email!.errors?.email" class="text-danger">invalid email</small>
-                            </div>
                         </mdb-form-control>
                     </div>
 

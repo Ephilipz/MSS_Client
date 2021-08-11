@@ -1,0 +1,14 @@
+li a {
+    font-size: 1.3em;
+    margin: auto 30px;
+}
+
+ul li .nav-link:hover, ul li .nav-link.active{
+    color: black;
+}
+
+.navbar-brand{
+    font-size: 1.8em;
+    letter-spacing: 4px;
+    font-weight: 200;
+}

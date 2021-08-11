@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
     this.authService.registerClient(registerVM).subscribe(
       (success) => {
         this.toast.success('Registration Complete');
-        this.router.navigate(['../Reservation/CalendarView']);
+        this.router.navigate(['../Profile/ManageProfile']);
       },
       (error) => {
         this.toast.error('Error Registering this user');
