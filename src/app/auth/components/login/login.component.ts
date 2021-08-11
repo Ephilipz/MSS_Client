@@ -11,7 +11,7 @@ import { LoginVM } from '../../entities/loginVM.entity';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  emailPattern = "^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)+(@psu.edu)$";
+  emailPattern = "^(?:[a-z]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)+(@psu.edu)$";
 
   get email() {
     return this.loginFormGroup.get('email')
@@ -24,15 +24,11 @@ export class LoginComponent implements OnInit {
   loginFormGroup: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]),
     password: new FormControl('', Validators.required),
-  }
-
-  );
-
+  });
 
   constructor(private authService: AuthService, private toast: ToastrService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   login() {
     const email = this.email?.value;
@@ -43,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(loginVM).subscribe(
       (success) => {
         this.toast.success('Welcome');
-        this.router.navigate(['../Reservation/CalendarView']);
+        this.router.navigate(['../Profile/ManageProfile']);
       },
       (error) => {
         this.toast.error('Error Registering this user');

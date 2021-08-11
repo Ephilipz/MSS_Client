@@ -9,7 +9,7 @@ import { LoginVM } from './entities/loginVM.entity';
   providedIn: 'root'
 })
 export class AuthService {
-  
+  Email: string = "";  
   constructor(private http: HttpClient) {
   }
   
@@ -22,6 +22,11 @@ export class AuthService {
   }
   
   public login(loginVM: LoginVM) {
+    this.Email = loginVM.Email;
     return this.http.post(environment.baseUrl + 'Auth/Login', loginVM);
+  }
+
+  getEmail(): any {
+    return this.Email;
   }
 }

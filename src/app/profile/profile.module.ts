@@ -6,6 +6,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { AuthRoutingModule } from '../auth/auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProfileRoutingModule } from './profile-routing.module';
     MdbFormsModule,
     ReactiveFormsModule,
     MdbValidationModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    AuthRoutingModule,
   ]
 })
 export class ProfileModule { }
