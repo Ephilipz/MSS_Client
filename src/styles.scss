@@ -1,44 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '~@fortawesome/fontawesome-free/scss/solid.scss';
-@import '~@fortawesome/fontawesome-free/scss/regular.scss';
-@import '~@fortawesome/fontawesome-free/scss/brands.scss';
- 
-@import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
-@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
-@import './app/shared/styles/globalVariables.scss';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
 
-html, body{
-    height: 100%;
-    background-color: $background-color;
+@import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
+@import url("https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap");
+@import "./app/shared/styles/globalVariables.scss";
+
+html,
+body {
+  height: 100%;
+  background-color: $background-color;
 }
 
-h1.mainHeading{
-    font-family: 'Yeseva One', cursive;
-    font-size: 5rem;
-    color: $main-color;
-    margin-bottom: 50px;
+h1.mainHeading {
+  font-family: "Yeseva One", cursive;
+  font-size: 5rem;
+  color: $main-color;
+  margin-bottom: 50px;
 }
 
-.centerText{
-    text-align: center;
+.centerText {
+  text-align: center;
 }
 
-button.btn{
-    background-color: $main-color;
-    color: #ffff;
-    border-radius: 0;
+button.btn {
+  background-color: $main-color;
+  color: #ffff;
+  border-radius: 0;
 }
 
-button.lg{
-    font-size: 2rem;
-    padding: 10px 50px;
+button.lg {
+  font-size: 2rem;
+  padding: 10px 50px;
 }
 
-button.btn:hover{
-    color:rgb(214, 214, 214);
+button.btn:hover {
+  color: rgb(214, 214, 214);
 }
 
-mdb-form-control{
-    margin-top: 20px;
+mdb-form-control {
+  margin-top: 20px;
 }

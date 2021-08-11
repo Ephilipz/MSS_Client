@@ -12,7 +12,7 @@ import { RegisterVM } from '../../entities/registerVM.entity';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  emailPattern = "^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)+(@psu.edu)$";
+  emailPattern = "^(?:[a-z]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)+(@psu.edu)$";
   
   get fullName() {
     return this.registerFormGroup.get('fullName');

@@ -12,7 +12,7 @@ export class ManageProfileComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  loginFormGroup: FormGroup = new FormGroup({
+  manageFormGroup = new FormGroup({
     fullName: new FormControl('', Validators.required),
 
     email: new FormControl('', Validators.required),
