@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
-import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { MdbDropdownMenuDirective, MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
@@ -23,11 +23,13 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

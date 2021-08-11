@@ -83,19 +83,22 @@ export class CalendarViewComponent implements OnInit{
       },
     },
   ];
-
+  
   refresh: Subject<any> = new Subject();
-
+  
   events: CalendarEvent[] = [
     
-      
+    
   ];
-
+  
   activeDayIsOpen: boolean = true;
+
+  excludeDays: number[] = [0, 6];
+
+  weekStartsOn = DAYS_OF_WEEK.SUNDAY;
 
   constructor(private modal: NgbModal) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -164,7 +167,9 @@ export class CalendarViewComponent implements OnInit{
     this.activeDayIsOpen = false;
   }
 
-  excludeDays: number[] = [0, 6];
+  hourSegmentClicked(event: any){
+    console.log(event);
+    this.modal.open(this.modalContent, { size: 'lg' });
+  }
 
-  weekStartsOn = DAYS_OF_WEEK.SUNDAY;
 }

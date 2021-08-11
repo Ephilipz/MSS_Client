@@ -7,31 +7,33 @@ pre {
   padding: 15px;
 }
 
-.centered{ 
-  margin: auto; max-width: 500px; max-height: 50px
+.centered {
+  margin: auto;
+  max-width: 500px;
+  max-height: 50px;
 }
 
-.vertical{
-  margin-top:8%;
+.vertical {
+  margin-top: 8%;
 }
 
-.btn-round{
+.btn-round {
   border-radius: 10px;
 }
 
-.header-btns{
+.header-btns {
   display: block;
   text-align: center;
   margin-top: 2rem;
 }
-.header-btns div{
+
+.header-btns div {
   display: inline-block;
   font-weight: 600;
   font-size: 40px;
   padding: 0px 50px;
 }
 
-.calendar-view{
-  max-width: 1180px;
-  margin: auto;
+.calendar-view {
+  // margin: auto;
 }
