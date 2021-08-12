@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['../Profile/ManageProfile']);
       },
       (error) => {
-        this.toast.error('Error Registering this user');
+        this.toast.error('Error sign this user in');
       }
     )
   }

@@ -13,6 +13,7 @@ import { Billing } from '../../entities/billing.entity';
   styleUrls: ['./manage-profile.component.scss']
 })
 export class ManageProfileComponent implements OnInit {
+  addressPattern = "^(\\d+\\s(?:[A-Za-z0-9.-]+\\s?)+(?:Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)\,\\s[A-Za-z]+,\\s[A-Z]{2}\\s\\d{4,10})$"
   emailPattern = "^(?:[a-z]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*)+(@psu.edu)$";
   //using MasterCard: begin with 51-55 and length from 16-19
   //using Visa: begin with 4 and length from 13-16
@@ -27,10 +28,10 @@ export class ManageProfileComponent implements OnInit {
 
   billingFormGroup: FormGroup = new FormGroup({
     nameOnCard: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
+    address: new FormControl('', [Validators.required, Validators.pattern(this.addressPattern)]),
     cardNumber: new FormControl('', [Validators.required, Validators.pattern(this.creditCardPattern)]),
-    CVC: new FormControl('', [Validators.required, Validators.maxLength(3), Validators.pattern(this.cvcPattern)]),
-    expiry: new FormControl('', Validators.required),
+    CVC: new FormControl('', [Validators.required, Validators.pattern(this.cvcPattern)]),
+    expiry: new FormControl('',[Validators.required, Validators.pattern(this.expiryPattern)]),
   });
 
   
@@ -62,7 +63,7 @@ export class ManageProfileComponent implements OnInit {
     return this.billingFormGroup.get('expiry');
   }
 
-  constructor(private profileService: ProfileService, private toast: ToastrService, private router: Router) { }
+  constructor(private profileService: ProfileService, private toast: ToastrService, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void { }
 
@@ -76,7 +77,7 @@ export class ManageProfileComponent implements OnInit {
     const cvc = this.cvc?.value;
     const expiry = this.expiry?.value;
 
-    const billing = new Billing(0, nameOnCard, cardNumber, address, expiry);
+    const billing = new Billing(0, nameOnCard, cardNumber, address, cvc, expiry);
     const user = new Client(email, fullName, billing);
 
     this.profileService.Update(user).subscribe(
