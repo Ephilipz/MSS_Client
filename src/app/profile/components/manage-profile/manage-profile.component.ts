@@ -68,7 +68,7 @@ export class ManageProfileComponent implements OnInit {
 
   update() {
     const email = this.email?.value;
-    const fullName = this.fullName?.value;
+    const fullName = this.fullName?.value.trim().replace(/\s+/g,".");
 
     const nameOnCard = this.nameOnCard?.value;
     const address = this.address?.value;
@@ -77,7 +77,7 @@ export class ManageProfileComponent implements OnInit {
     const expiry = this.expiry?.value;
 
     const billing = new Billing(0, nameOnCard, cardNumber, address, expiry);
-    const user = new Client(email, fullName);
+    const user = new Client(email, fullName, billing);
 
     this.profileService.Update(user).subscribe(
       (success) => {
