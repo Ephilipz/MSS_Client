@@ -30,7 +30,7 @@ export class ManageProfileComponent implements OnInit {
 
   billingFormGroup: FormGroup = new FormGroup({
     nameOnCard: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
+    address: new FormControl('', [Validators.required, Validators.pattern(this.addressPattern)]),
     cardNumber: new FormControl('', [Validators.required, Validators.pattern(this.creditCardPattern)]),
     expiry: new FormControl('', Validators.required),
   });
@@ -60,7 +60,7 @@ export class ManageProfileComponent implements OnInit {
     return this.billingFormGroup.get('expiry');
   }
 
-  constructor(private profileService: ProfileService, private toast: ToastrService, private router: Router) { }
+  constructor(private profileService: ProfileService, private toast: ToastrService, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.profileService.getCurrentUserWithBilling().subscribe(
@@ -83,7 +83,7 @@ export class ManageProfileComponent implements OnInit {
 
   update() {
     const email = this.email?.value;
-    const fullName = this.fullName?.value;
+    const fullName = this.fullName?.value.trim().replace(/\s+/g,".");
 
     const nameOnCard = this.nameOnCard?.value;
     const address = this.address?.value;

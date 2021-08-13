@@ -3,7 +3,7 @@ export class User {
     UserName: string;
 
     constructor(Email: string,
-        FullName: string) {
+        UserName: string) {
         this.Email = Email;
         this.UserName = FullName;
     }

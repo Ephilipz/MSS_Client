@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <mdb-form-control>
                             <input mdbInput type="text" formControlName="email" class="form-control" id="email"
-                                [disabled]="true" />
+                                [disabled]="false" />
                             <label mdbLabel class="form-label" for="email">Email</label>
                         </mdb-form-control>
                     </div>
@@ -39,6 +39,10 @@
                         <mdb-form-control>
                             <input mdbInput type="text" formControlName="address" class="form-control" />
                             <label mdbLabel class="form-label" for="address">Address</label>
+
+                            <div *ngIf="(address!.invalid && address!.touched) || address!.dirty">
+                                <small *ngIf="address!.errors?.pattern" class="text-danger">invalid US address</small>
+                            </div>
                         </mdb-form-control>
                     </div>
 
@@ -56,7 +60,7 @@
 
                     <div class="form-group">
                         <mdb-form-control class="expiry">
-                            <input mdbInput type="text" formControlName="expiry" class="form-control" />
+                            <input mdbInput type="text" formControlName="expiry" class="form-control" maxlength="5" />
                             <label mdbLabel class="form-label" for="expiry">Expiry (mm/yy)</label>
 
                             <div *ngIf="(expiry!.invalid && expiry!.touched) || expiry!.dirty">
