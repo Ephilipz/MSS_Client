@@ -10,9 +10,7 @@ import { ReservationModalComponent } from './components/reservation-modal/reserv
 const routes: Routes = [
     { path: '', redirectTo: 'CalendarView', pathMatch: 'full' },
     { path: 'CalendarView', component: CalendarViewComponent },
-    { path: 'ReserveSpecialRoom', component: ReservationModalComponent },
-    { path: 'ManageMeetingRoom', component: ManageMeetingComponent }
-
+    { path: 'ManageMeetingRoom/:id', component: ManageMeetingComponent }
 ];
 
 @NgModule({

@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
 
     if (!this.isLoggedIn)
       return;
-      
+
     this.profileService.checkIsAdmin().subscribe(
       (res: any) => {
         this.isAdmin = res.isAdmin;

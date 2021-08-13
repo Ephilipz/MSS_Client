@@ -11,6 +11,10 @@ import {
   endOfDay,
   isSameDay,
   isSameMonth,
+  setHours,
+  setMinutes,
+  isAfter,
+  isBefore,
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -24,6 +28,9 @@ import { DAYS_OF_WEEK } from 'angular-calendar';
 import { ReservationService } from '../../reservation.service';
 import { Reservation } from '../../entites/reservation.entity';
 import { ToastrService } from 'ngx-toastr';
+import { OffsetTimeHandler } from 'src/app/shared/dates/offsetTimeHandler';
+import { ReservationModalComponent } from '../reservation-modal/reservation-modal.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 const colors: any = {
   red: {
@@ -49,8 +56,7 @@ const colors: any = {
 })
 export class CalendarViewComponent implements OnInit {
 
-  @ViewChild('modalContent', { static: true })
-  modalContent!: TemplateRef<any>;
+  modalRef!: MdbModalRef<ReservationModalComponent>;
 
   view: CalendarView = CalendarView.Week;
 
@@ -58,24 +64,19 @@ export class CalendarViewComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  modalData!: {
-    action: string;
-    event: CalendarEvent;
-  };
-
   actions: CalendarEventAction[] = [];
 
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [];
 
-  activeDayIsOpen: boolean = true;
-
   excludeDays: number[] = [0, 6];
 
   weekStartsOn = DAYS_OF_WEEK.SUNDAY;
 
-  constructor(private modal: NgbModal, private reservationService: ReservationService, private toast: ToastrService) { }
+  constructor(private reservationService: ReservationService,
+    private toast: ToastrService,
+    private modalService: MdbModalService) { }
 
   ngOnInit(): void {
     this.getReservations();
@@ -87,9 +88,10 @@ export class CalendarViewComponent implements OnInit {
       (reservationList) => {
         reservationList.forEach(
           (reservation) => {
-            this.events.push(this.getCalendarEventFromReservation(reservation))
+            this.getCalendarEventFromReservation(reservation);
           }
         );
+        this.refresh.next();
       },
       (error) => {
         this.toast.error('Unable to load reservations');
@@ -98,62 +100,37 @@ export class CalendarViewComponent implements OnInit {
   }
 
   private getCalendarEventFromReservation(reservation: Reservation) {
-    return <CalendarEvent>{
-      title: 'Room ' + reservation.Room?.Id,
-      start: reservation.StartDateTime,
-      end: reservation.EndDateTime,
-      color: colors.blue
-    }
-  }
-
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
-
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    const isReservationFinished = isBefore(OffsetTimeHandler.LocalFromUTC(reservation.EndDateTime), new Date());
+    this.events = [
+      ...this.events,
+      {
+        title: 'Room ' + reservation.Room?.Id,
+        start: OffsetTimeHandler.LocalFromUTC(reservation.StartDateTime),
+        end: OffsetTimeHandler.LocalFromUTC(reservation.EndDateTime),
+        color: colors.blue,
+        draggable: false
+      },
+    ];
   }
 
   setView(view: CalendarView) {
     this.view = view;
   }
 
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-  }
-
   hourSegmentClicked(event: any) {
-    console.log(event);
-    this.modal.open(this.modalContent, { size: 'lg' });
+    const isAfterCurrentDate = isAfter(event.date, new Date());
+    if (!isAfterCurrentDate) {
+      this.toast.info('Please select a valid time', 'Invalid Time');
+      return;
+    }
+    this.modalRef = this.modalService.open(ReservationModalComponent,
+      {
+        data: { startDate: event.date },
+        modalClass: 'modal-lg'
+      });
+    this.modalRef.onClose.subscribe(
+      () => this.getReservations()
+    )
   }
 
 }

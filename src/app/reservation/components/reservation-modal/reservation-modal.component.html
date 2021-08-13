@@ -1,115 +1,91 @@
 <!-- Reserve a Special room -->
-<div class="container">
+<div class="container modal-body">
     <div class="box">
-        <div class="box">
-            <form [formGroup]="rerervationModal" class="mx-auto centerText">
-                <div class="form-group">
-                    <mdb-form-control class="m-t-0">
-                        <select class="form-select" aria-label="Select Room">
-                            <option selected>Room 41</option>
-                            <option value="2">Room 42</option>
-                            <option value="3">Room 43</option>
-                        </select>
-                    </mdb-form-control>
-                    <p class="time">11am-12pm</p>
+        <div class="box centerText">
+            <p class="time topTime mb-0">{{startDate | date:"d MMM YYYY"}}</p>
+            <p class="time mt-0">{{startDate | date:"h a"}} - {{endDate | date:"h a"}}</p>
+            <div class="form-group">
+                <mdb-form-control class="m-t-0">
+                    <select class="form-select" aria-label="Select Room" [(ngModel)]="selectedRoom">
+                        <option *ngFor="let room of rooms" [ngValue]="room">Room {{room.Id}}{{room.IsSpecial ? '
+                            (paid)'
+                            : ''}}</option>
+                    </select>
+                </mdb-form-control>
+            </div>
+            <hr class="my-3">
+            <div class="form-flex-row" *ngIf="selectedRoom?.IsSpecial">
+                <form class="form-col flex-1" [formGroup]="creditCardFormgroup">
+                    <div class="form-group">
+                        <mdb-form-control class="m-t-0">
+                            <input mdbInput [disabled]="payPalGroupHasValue()" type="text" formControlName="nameOnCard"
+                                class="form-control" />
+                            <label mdbLabel class="form-label" for="nameOnCard">Name on card</label>
+                        </mdb-form-control>
+                    </div>
+
+                    <div class="form-group">
+                        <mdb-form-control>
+                            <input mdbInput [disabled]="payPalGroupHasValue()" type="text" formControlName="address"
+                                class="form-control" />
+                            <label mdbLabel class="form-label" for="address">Address</label>
+                        </mdb-form-control>
+                    </div>
+
+                    <div class="form-group">
+                        <mdb-form-control>
+                            <input mdbInput [disabled]="payPalGroupHasValue()" formControlName="cardNumber"
+                                class="form-control" />
+                            <label mdbLabel class="form-label" for="cardNumber">Card Number</label>
+                        </mdb-form-control>
+                    </div>
+
+                    <div class="form-group cvc-field">
+                        <mdb-form-control class="cvc">
+                            <input mdbInput [disabled]="payPalGroupHasValue()" formControlName="cvc"
+                                class="form-control" autofocus />
+                            <label mdbLabel class="form-label" for="password">CVC</label>
+                        </mdb-form-control>
+                        <mdb-form-control class="expiry">
+                            <input mdbInput [disabled]="payPalGroupHasValue()" formControlName="expiry"
+                                class="form-control" />
+                            <label mdbLabel class="form-label" for="expiry">Expiry (mm/yy)</label>
+                        </mdb-form-control>
+                    </div>
+                </form>
+
+                <div class="form-col flex-inherit">
+                    <span class="or">OR</span>
                 </div>
-                <div class="form-flex-row">
-                    <div class="form-col flex-1">
-                        <div class="form-group">
-                            <mdb-form-control class="m-t-0">
-                                <input mdbInput type="text" formControlName="fullName" class="form-control" />
-                                <label mdbLabel class="form-label" for="fullName">Name on card</label>
-                            </mdb-form-control>
-                        </div>
-
-                        <div class="form-group">
-                            <mdb-form-control>
-                                <input mdbInput type="text" formControlName="email" class="form-control" />
-                                <label mdbLabel class="form-label" for="email">Address</label>
-                            </mdb-form-control>
-                        </div>
-
-                        <div class="form-group">
-                            <mdb-form-control>
-                                <input mdbInput type="password" formControlName="password" class="form-control" />
-                                <label mdbLabel class="form-label" for="password">Card Number</label>
-                            </mdb-form-control>
-                        </div>
-
-                        <div class="form-group cvc-field">
-                            <mdb-form-control class="cvc">
-                                <input mdbInput type="password" formControlName="password" class="form-control" />
-                                <label mdbLabel class="form-label" for="password">CVC</label>
-                            </mdb-form-control>
-                            <mdb-form-control class="expiry">
-                                <input mdbInput type="password" formControlName="password" class="form-control" />
-                                <label mdbLabel class="form-label" for="password">Expiry (mm/yy)</label>
-                            </mdb-form-control>
-                        </div>
+                <form class="form-col flex-1" [formGroup]="payPalFormgroup">
+                    <div class="form-group">
+                        <mdb-form-control>
+                            <input mdbInput [disabled]="creditGroupHasValue()" type="text" formControlName="email"
+                                class="form-control" />
+                            <label mdbLabel class="form-label" for="email">Paypal email</label>
+                        </mdb-form-control>
                     </div>
-                    <div class="form-col flex-inherit">
-                        <span class="or">OR</span>
+
+                    <div class="form-group">
+                        <mdb-form-control>
+                            <input mdbInput [disabled]="creditGroupHasValue()" type="password"
+                                formControlName="password" class="form-control" />
+                            <label mdbLabel class="form-label" for="password">Paypal password</label>
+                        </mdb-form-control>
                     </div>
-                    <div class="form-col flex-1">
+                </form>
+            </div>
 
-                        <div class="form-group">
-                            <mdb-form-control>
-                                <input mdbInput type="text" formControlName="email" class="form-control" />
-                                <label mdbLabel class="form-label" for="email">Paypal email</label>
-                            </mdb-form-control>
-                        </div>
-
-                        <div class="form-group">
-                            <mdb-form-control>
-                                <input mdbInput type="password" formControlName="password" class="form-control" />
-                                <label mdbLabel class="form-label" for="password">Paypal password</label>
-                            </mdb-form-control>
-                        </div>
-
-                    </div>
+            <div class="form-btn-row">
+                <div></div>
+                <div class="reserve-btn">
+                    <button type="submit" class="btn center" [disabled]="formsInvalid()"
+                        (click)="reserve()">Reserve</button>
                 </div>
-
-                <div class="form-btn-row">
-                    <div></div>
-                    <div class="reserve-btn"><button type="submit" class="btn sm mt-4 center">Reserve</button></div>
-                    <div class="cost">
-                        <p>Cost : $100</p>
-                    </div>
-
+                <div class="cost">
+                    <p *ngIf="selectedRoom?.IsSpecial">Cost : $100</p>
                 </div>
-
-
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<!-- Reserve a Free room -->
-<div class="container">
-    <div class="box">
-        <div class="box">
-            <form class="mx-auto centerText">
-                <div class="form-group">
-                    <div class="m-t-0">
-                        <select class="form-select" aria-label="Select Room">
-                            <option selected>Room 41</option>
-                            <option value="2">Room 42</option>
-                            <option value="3">Room 43</option>
-                        </select>
-                    </div>
-                    <p class="time">11am-12pm</p>
-                </div>
-
-                <div class="form-btn-row">
-                    <div></div>
-                    <div class="reserve-btn"><button type="submit" class="btn sm mt-4 center">Reserve</button></div>
-                    <div class="cost">
-                        <p>Cost : $100</p>
-                    </div>
-                </div>
-
-            </form>
+            </div>
         </div>
     </div>
 </div>

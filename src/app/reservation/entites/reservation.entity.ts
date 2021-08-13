@@ -1,3 +1,4 @@
+import { User } from "src/app/profile/entities/user.entity";
 import { Room } from "src/app/room/entities/room.entity";
 
 export class Reservation {
@@ -6,10 +7,10 @@ export class Reservation {
     Room?: Room;
     StartDateTime: Date;
     EndDateTime: Date;
-    Participants: Array<any>;
+    Participants: string;
 
-    constructor(Id: number = 0,
-        User = null,
+    constructor(Id: number,
+        User: User,
         Room: Room,
         StartDateTime: Date,
         EndDateTime: Date,
@@ -19,6 +20,6 @@ export class Reservation {
         this.Room = Room;
         this.StartDateTime = StartDateTime;
         this.EndDateTime = EndDateTime;
-        this.Participants = Participants;
+        this.Participants = Participants.join(',');
     }
 }

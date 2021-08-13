@@ -1,53 +1,63 @@
-.form-flex-row{
+.form-flex-row {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.time{
+.time {
     font-size: 40px;
     font-weight: 300;
+    color: black;
 }
-.form-col .or{
+
+.topTime{
+    font-size: 30px;
+    font-weight: 200;
+    color: rgb(77, 77, 77);
+    letter-spacing: 2px;
+}
+.form-col .or {
     font-size: 40px;
     font-weight: 800;
     padding: 0px 50px;
     color: #000;
 }
-.cvc-field{
+.cvc-field {
     display: flex;
 }
-.cvc{
+.cvc {
     flex: 1;
     min-width: 54px;
     margin-right: 10px;
 }
-.expiry{
+.expiry {
     flex-grow: 2;
 }
 
-.reserve-btn button{
+.reserve-btn button {
     font-size: 20px;
     padding: 5px 40px;
-    border-radius: 13px;
     text-transform: capitalize;
-    margin-top: 0px !important;
+    margin: 0px;
 }
-.form-btn-row{
+
+.form-btn-row {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-top: 50px;
 }
-.form-btn-row div{
+.form-btn-row div {
     flex: 1;
 }
-.cost p{
+.cost p {
     margin: 0px;
     font-size: 26px;
     font-weight: 300;
     text-align: right;
 }
-.flex-1{
+.flex-1 {
     flex: 1;
 }
-.flex-inherit{
+.flex-inherit {
     flex: inherit;
-} 
+}
