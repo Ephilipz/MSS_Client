@@ -10,6 +10,7 @@ export class ComplaintHistoryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  
   }
 
 }
