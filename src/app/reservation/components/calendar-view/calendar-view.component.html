@@ -10,7 +10,7 @@
 
   <!--weekly view for the calendar-->
   <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [refresh]="refresh" [excludeDays]="excludeDays"
-    [dayStartHour]="8" [dayEndHour]="17" [hourSegments]="1" (hourSegmentClicked)="hourSegmentClicked($event)">
+    [dayStartHour]="8" [dayEndHour]="17" [hourSegments]="1" (hourSegmentClicked)="hourSegmentClicked($event)" (eventClicked)="eventClicked($event)">
   </mwl-calendar-week-view>
 
 

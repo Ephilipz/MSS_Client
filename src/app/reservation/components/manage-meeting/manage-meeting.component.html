@@ -1,24 +1,22 @@
 <div class="main">
-    <h1 class="head-title center"><i class="fa fa-star"></i>Manage Meeting</h1>
-    <p class="time center">11am-12pm</p>
+    <h1 class="mainHeading center"><i class="fa fa-star" *nIf="reservation?.Room?.IsSpecial"></i>Manage Meeting</h1>
+    <p class="time center">{{reservation?.StartDateTime +'z' | date : "h a"}} - {{reservation?.EndDateTime+'z' | date : "h a"}}</p>
     <div class="content-info">
         <div class="box bordered-box">
             <h4 class="center">Participants</h4>
             <ul>
-                <li>
-                    <span>John Williams</span>
-                    <button class="close-btn">
+                <li *ngFor="let participant of participants">
+                    <span>{{participant}}</span>
+                    <button class="close-btn" (click)="removeParticipant(participant)">
                         <i class="fa fa-times"></i>
                     </button>
                 </li>
-                <li>
-                    <span>John Williams</span>
-                    <button class="close-btn">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </li>
+                <mdb-form-control style="background-color: white;">
+                    <input mdbInput type="email" class="form-control" [(ngModel)]="partipantEmail"/>
+                    <label mdbLabel class="form-label" for="email">Participant Email</label>
+                </mdb-form-control>
             </ul>
-            <div class="center"><button type="button" class="btn sm mt-4 center add-btn">Add Participants</button>
+            <div class="center"><button type="button" class="btn sm mt-4 center add-btn" (click)="addParticipant()" [disabled]="partipantEmail.trim().length == 0">Add Participant</button>
             </div>
         </div>
         <div class="box center" style="padding-left: 50px;">
@@ -26,7 +24,7 @@
             <p class="time">1 Hour, 42 minutes left</p>
         </div>
     </div>
-    <div class="center cancel-btn mt-4"><button type="submit" class="btn sm mt-4 center">Cancel Reservation</button>
+    <div class="center cancel-btn mt-4"><button routerLink="../../CalendarView" class="btn lg mt-4 center">Back</button>
     </div>
 
 </div>

@@ -1,27 +1,16 @@
-
 import {
   Component,
   ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
   OnInit
 } from '@angular/core';
 import {
-  startOfDay,
-  endOfDay,
-  isSameDay,
-  isSameMonth,
-  setHours,
-  setMinutes,
   isAfter,
   isBefore,
 } from 'date-fns';
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
-  CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
 import { DAYS_OF_WEEK } from 'angular-calendar';
@@ -31,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 import { OffsetTimeHandler } from 'src/app/shared/dates/offsetTimeHandler';
 import { ReservationModalComponent } from '../reservation-modal/reservation-modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -76,7 +66,9 @@ export class CalendarViewComponent implements OnInit {
 
   constructor(private reservationService: ReservationService,
     private toast: ToastrService,
-    private modalService: MdbModalService) { }
+    private modalService: MdbModalService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getReservations();
@@ -104,6 +96,7 @@ export class CalendarViewComponent implements OnInit {
     this.events = [
       ...this.events,
       {
+        id: reservation.Id,
         title: 'Room ' + reservation.Room?.Id,
         start: OffsetTimeHandler.LocalFromUTC(reservation.StartDateTime),
         end: OffsetTimeHandler.LocalFromUTC(reservation.EndDateTime),
@@ -131,6 +124,16 @@ export class CalendarViewComponent implements OnInit {
     this.modalRef.onClose.subscribe(
       () => this.getReservations()
     )
+  }
+
+  eventClicked(e: any) {
+    const event: CalendarEvent = e.event;
+    const isReservationFinished = isBefore(OffsetTimeHandler.LocalFromUTC(event.end!), new Date());
+    if (isReservationFinished) {
+      this.toast.info('this reservation has already finished');
+      return;
+    }
+    this.router.navigate(['../ManageMeetingRoom', event.id], {relativeTo: this.activatedRoute});
   }
 
 }

@@ -9,7 +9,7 @@ import { Reservation } from './entites/reservation.entity';
 export class ReservationService {
 
   private readonly baseURL = environment.baseUrl + 'Reservation';
-  
+
   constructor(private http: HttpClient) {
   }
 
@@ -23,5 +23,9 @@ export class ReservationService {
 
   public createReservation(reservation: Reservation) {
     return this.http.post<any>(this.baseURL, reservation);
+  }
+
+  public updateReservation(reservation: Reservation) {
+    return this.http.put<any>(this.baseURL, reservation);
   }
 }
