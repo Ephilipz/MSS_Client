@@ -1,10 +1,10 @@
 export class User {
     Email: string;
-    FullName: string;
+    UserName: string;
 
     constructor(Email: string,
         FullName: string) {
         this.Email = Email;
-        this.FullName = FullName;
+        this.UserName = FullName;
     }
 }

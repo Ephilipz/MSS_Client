@@ -2,16 +2,19 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Meeting Management System</a>
 
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" (click)="basicNavbar.toggle()" aria-expanded="false"
+            aria-label="Toggle navigation" *ngIf="isLoggedIn">
             <i class="fas fa-bars"></i>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mr-5">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" mdbCollapse #basicNavbar="mdbCollapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mr-5" *ngIf="isLoggedIn">
                 <!-- Link -->
                 <li class="nav-item">
+                    <a class="nav-link" routerLink="Reservation">Reservations</a>
+                </li>
+                <!-- Link -->
+                <li class="nav-item" *ngIf="isAdmin">
                     <a class="nav-link" routerLink="Room">Rooms</a>
                 </li>
                 <!-- Link -->
@@ -21,6 +24,10 @@
                 <!-- Link -->
                 <li class="nav-item">
                     <a class="nav-link" routerLink="Profile">Profile</a>
+                </li>
+                <!-- Link -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="" (click)="logout()">Logout</a>
                 </li>
             </ul>
         </div>

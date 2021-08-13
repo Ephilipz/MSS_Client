@@ -21,19 +21,9 @@ pre {
   border-radius: 10px;
 }
 
-.header-btns {
-  display: block;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.header-btns div {
+.header div {
   display: inline-block;
   font-weight: 600;
-  font-size: 40px;
-  padding: 0px 50px;
-}
-
-.calendar-view {
-  // margin: auto;
+  font-size: 2em;
+  margin: 30px auto;
 }

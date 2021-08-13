@@ -9,12 +9,8 @@ import {
 import {
   startOfDay,
   endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours,
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -25,6 +21,9 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { DAYS_OF_WEEK } from 'angular-calendar';
+import { ReservationService } from '../../reservation.service';
+import { Reservation } from '../../entites/reservation.entity';
+import { ToastrService } from 'ngx-toastr';
 
 const colors: any = {
   red: {
@@ -48,9 +47,7 @@ const colors: any = {
   templateUrl: './calendar-view.component.html',
 
 })
-export class CalendarViewComponent implements OnInit{
-
-
+export class CalendarViewComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true })
   modalContent!: TemplateRef<any>;
@@ -66,39 +63,47 @@ export class CalendarViewComponent implements OnInit{
     event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-  
+  actions: CalendarEventAction[] = [];
+
   refresh: Subject<any> = new Subject();
-  
-  events: CalendarEvent[] = [
-    
-    
-  ];
-  
+
+  events: CalendarEvent[] = [];
+
   activeDayIsOpen: boolean = true;
 
   excludeDays: number[] = [0, 6];
 
   weekStartsOn = DAYS_OF_WEEK.SUNDAY;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private reservationService: ReservationService, private toast: ToastrService) { }
+
   ngOnInit(): void {
+    this.getReservations();
+  }
+
+  private getReservations(): void {
+    this.events = [];
+    this.reservationService.getReservations().subscribe(
+      (reservationList) => {
+        reservationList.forEach(
+          (reservation) => {
+            this.events.push(this.getCalendarEventFromReservation(reservation))
+          }
+        );
+      },
+      (error) => {
+        this.toast.error('Unable to load reservations');
+      }
+    );
+  }
+
+  private getCalendarEventFromReservation(reservation: Reservation) {
+    return <CalendarEvent>{
+      title: 'Room ' + reservation.Room?.Id,
+      start: reservation.StartDateTime,
+      end: reservation.EndDateTime,
+      color: colors.blue
+    }
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -138,27 +143,6 @@ export class CalendarViewComponent implements OnInit{
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -167,7 +151,7 @@ export class CalendarViewComponent implements OnInit{
     this.activeDayIsOpen = false;
   }
 
-  hourSegmentClicked(event: any){
+  hourSegmentClicked(event: any) {
     console.log(event);
     this.modal.open(this.modalContent, { size: 'lg' });
   }

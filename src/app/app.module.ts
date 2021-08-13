@@ -22,8 +22,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MenuComponent } from './menu/menu.component';
+import { AuthInterceptor } from './shared/network/interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -53,12 +54,12 @@ import { MenuComponent } from './menu/menu.component';
     ReactiveFormsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 3000,
       positionClass: 'toast-bottom-right'
     }),
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent],
   exports: []
 })
