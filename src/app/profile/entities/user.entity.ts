@@ -5,6 +5,6 @@ export class User {
     constructor(Email: string,
         UserName: string) {
         this.Email = Email;
-        this.UserName = FullName;
+        this.UserName = UserName;
     }
 }

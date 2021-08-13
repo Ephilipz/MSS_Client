@@ -30,7 +30,7 @@ export class ManageProfileComponent implements OnInit {
 
   billingFormGroup: FormGroup = new FormGroup({
     nameOnCard: new FormControl('', Validators.required),
-    address: new FormControl('', [Validators.required, Validators.pattern(this.addressPattern)]),
+    address: new FormControl('', [Validators.required]),
     cardNumber: new FormControl('', [Validators.required, Validators.pattern(this.creditCardPattern)]),
     expiry: new FormControl('', Validators.required),
   });
