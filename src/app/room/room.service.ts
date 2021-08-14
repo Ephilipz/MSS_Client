@@ -20,6 +20,14 @@ export class RoomService {
     return this.http.get<Room>(this.baseUrl + `/${Id}`);
   }
 
+  public createRoom(room: Room) {
+    return this.http.post<any>(this.baseUrl, room);
+  }
+
+  public deleteRoom(id: number) {
+    return this.http.delete<any>(this.baseUrl + `/${id}`);
+  }
+
   public getAvailableRoomsInTimeSlot(StartDate: Date, EndDate: Date) {
     this.http.get<Array<Room>>(this.baseUrl + `/${StartDate}/${EndDate}`);
   }

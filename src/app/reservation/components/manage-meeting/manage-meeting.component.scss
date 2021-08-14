@@ -1,4 +1,4 @@
-.head-title i{
+.mainHeading i{
     background-color: #dcdc31;
     border-radius: 50%;
     font-size: 18px;
@@ -9,6 +9,7 @@
     text-align: center;
     color: #fff;
     margin-right: 15px;
+    transform: scale(1.2);
 }
 .time{
     font-size: 28pt;
@@ -49,7 +50,6 @@ ul{
     font-size: 11px;
 }
 li{
-
     display: flex;
     margin-bottom: 10px;
     justify-content: space-between;

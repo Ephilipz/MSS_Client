@@ -1,5 +1,5 @@
-<div class="main">
-    <h1 class="mainHeading center"><i class="fa fa-star" *nIf="reservation?.Room?.IsSpecial"></i>Manage Meeting</h1>
+<div class="main" *ngIf="reservation">
+    <h1 class="mainHeading center"><i class="fa fa-star" *ngIf="reservation?.Room?.IsSpecial"></i>Manage Meeting</h1>
     <p class="time center">{{reservation?.StartDateTime +'z' | date : "h a"}} - {{reservation?.EndDateTime+'z' | date : "h a"}}</p>
     <div class="content-info">
         <div class="box bordered-box">

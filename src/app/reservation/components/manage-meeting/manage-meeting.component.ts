@@ -33,9 +33,6 @@ export class ManageMeetingComponent implements OnInit {
         }
       )
     }
-    else {
-      this.router.navigate(['../'], { relativeTo: this.route });
-    }
   }
 
   addParticipant() {

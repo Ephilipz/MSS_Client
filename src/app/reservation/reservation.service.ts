@@ -13,8 +13,12 @@ export class ReservationService {
   constructor(private http: HttpClient) {
   }
 
-  public getReservations() {
+  public getAllReservations() {
     return this.http.get<Array<Reservation>>(this.baseURL);
+  }
+
+  public getReservations() {
+    return this.http.get<Array<Reservation>>(this.baseURL + '/GetReservationsForUser');
   }
 
   public getReservation(id: number) {

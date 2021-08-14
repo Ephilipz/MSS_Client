@@ -21,6 +21,7 @@ import { OffsetTimeHandler } from 'src/app/shared/dates/offsetTimeHandler';
 import { ReservationModalComponent } from '../reservation-modal/reservation-modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileService } from 'src/app/profile/profile.service';
 
 const colors: any = {
   red: {
@@ -64,19 +65,28 @@ export class CalendarViewComponent implements OnInit {
 
   weekStartsOn = DAYS_OF_WEEK.SUNDAY;
 
+  isAdmin: boolean = false;
+
   constructor(private reservationService: ReservationService,
     private toast: ToastrService,
     private modalService: MdbModalService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private profileService: ProfileService) { }
 
   ngOnInit(): void {
+    this.loadPageData();
+  }
+
+  private async loadPageData() {
+    this.isAdmin = (<any>(await this.profileService.checkIsAdmin().toPromise()))['isAdmin'];
     this.getReservations();
   }
 
   private getReservations(): void {
     this.events = [];
-    this.reservationService.getReservations().subscribe(
+    const functionName = this.isAdmin ? 'getAllReservations' : 'getReservations';
+    this.reservationService[functionName]().subscribe(
       (reservationList) => {
         reservationList.forEach(
           (reservation) => {
@@ -133,7 +143,7 @@ export class CalendarViewComponent implements OnInit {
       this.toast.info('this reservation has already finished');
       return;
     }
-    this.router.navigate(['../ManageMeetingRoom', event.id], {relativeTo: this.activatedRoute});
+    this.router.navigate(['../ManageMeetingRoom', event.id], { relativeTo: this.activatedRoute });
   }
 
 }

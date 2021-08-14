@@ -1,1 +1,14 @@
-<p>edit-or-create-room works!</p>
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Add Room</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+</div>
+<div class="modal-body">
+    <div class="form-check form-switch">
+        <input mdbCheckbox class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="checkChange($event)" />
+        <label class="form-check-label" for="flexSwitchCheckDefault">Special Room</label>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn" (click)="createRoom()">Add Room</button>
+</div>

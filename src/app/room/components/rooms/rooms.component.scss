@@ -1,24 +1,20 @@
-
-.center{
+.center {
     text-align: center;
 }
-.main{
+.main {
     margin: 50px 0px;
 }
-.content-info{
+.content-info {
     display: flex;
     justify-content: center;
     margin-top: 60px;
     color: #000;
-    max-width: 1000px;
+    max-width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
-.round-btn{
-    border-radius: 9px;
-}
 
-.close-btn{
+.close-btn {
     color: #fff;
     background-color: red;
     border-radius: 50%;
@@ -29,7 +25,7 @@
     width: 20px;
     font-size: 11px;
 }
-.star-btn{
+.star-btn {
     background-color: #dcdc31;
     border-radius: 50%;
     font-size: 11px;
@@ -41,13 +37,22 @@
     color: #fff;
     margin-right: 6px;
 }
-.clear-btn button{
-background-color: transparent;
-border: 0px;
+.clear-btn button {
+    background-color: transparent;
+    border: 0px;
 }
-.blue{
+.blue {
     color: blue;
 }
-.red{
+.red {
     color: red;
-} 
+}
+
+thead tr th{
+    font-size: 2em;
+    font-weight: 200;
+}
+
+tbody tr{
+    font-size: 1.3em;
+}

@@ -6,8 +6,8 @@ import { RoomsComponent } from './components/rooms/rooms.component';
 
 
 const routes: Routes = [
-    { path: 'RoomsView', component: RoomsComponent }
-
+    { path: '', redirectTo: 'Rooms', pathMatch: 'full' },
+    { path: 'Rooms', component: RoomsComponent }
 ];
 
 @NgModule({

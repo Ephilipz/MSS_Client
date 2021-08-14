@@ -33,13 +33,13 @@ export class LoginComponent implements OnInit {
   login() {
     const email = this.email?.value;
     const password = this.password?.value;
-
     const loginVM = new LoginVM(email, password);
 
     this.authService.login(loginVM).subscribe(
       (success) => {
         this.toast.success('Welcome');
-        this.router.navigate(['../Profile/ManageProfile']);
+        this.router.navigate(['../Reservation']);
+        location.reload();
       },
       (error) => {
         this.toast.error('Ivalid email or password');
