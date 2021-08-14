@@ -22,7 +22,7 @@
                     <a class="nav-link" routerLink="Complaint">Complaints</a>
                 </li>
                 <!-- Link -->
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!isAdmin">
                     <a class="nav-link" routerLink="Profile">Profile</a>
                 </li>
                 <!-- Link -->

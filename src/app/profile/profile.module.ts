@@ -7,11 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
+import { ProfileListComponent } from './components/profile-list/profile-list.component';
 
 @NgModule({
   declarations: [
     ChangePasswordComponent,
-    ManageProfileComponent
+    ManageProfileComponent,
+    ProfileListComponent
   ],
   imports: [
     CommonModule,

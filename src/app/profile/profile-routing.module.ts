@@ -6,8 +6,9 @@ import { ManageProfileComponent } from './components/manage-profile/manage-profi
 
 
 const routes: Routes = [
+    { path: '', redirectTo: 'ManageProfile', pathMatch: 'full' },
     { path: 'ManageProfile', component: ManageProfileComponent },
-    { path: 'ChangePassword', component: ChangePasswordComponent}
+    { path: 'ChangePassword', component: ChangePasswordComponent }
 ];
 
 @NgModule({

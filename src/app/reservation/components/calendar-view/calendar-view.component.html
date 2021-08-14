@@ -10,7 +10,8 @@
 
   <!--weekly view for the calendar-->
   <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [refresh]="refresh" [excludeDays]="excludeDays"
-    [dayStartHour]="8" [dayEndHour]="17" [hourSegments]="1" (hourSegmentClicked)="hourSegmentClicked($event)" (eventClicked)="eventClicked($event)">
+    [dayStartHour]="8" [dayEndHour]="17" [hourSegments]="1" (hourSegmentClicked)="hourSegmentClicked($event)"
+    (eventClicked)="eventClicked($event)">
   </mwl-calendar-week-view>
 
 
@@ -26,16 +27,4 @@
     </button>
   </div>
 
-  <!--Button and title to change meetings-->
-  <h3>
-    Reservations
-    <div class="clearfix"></div>
-  </h3>
-
-  <div class="table-responsive">
-
-    <tbody>
-    </tbody>
-
-  </div>
 </div>

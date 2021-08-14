@@ -18,11 +18,11 @@ export class ProfileService {
   }
 
   public getUsers() {
-    return this.http.get<Array<User>>(this.baseUrl);
+    return this.http.get<Array<Client>>(this.baseUrl);
   }
 
   public getUser(id: number) {
-    return this.http.get<User>(this.baseUrl + `\{id}`);
+    return this.http.get<Client>(this.baseUrl + `\{id}`);
   }
 
   public getCurrentUserWithBilling() {
